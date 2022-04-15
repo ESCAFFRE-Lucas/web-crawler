@@ -3,16 +3,13 @@ const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
-  await page.goto('https://google.com', {
+  await page.goto('https://hp21.ynov.com/TOU', {
     waitUntil: 'networkidle2',
   });
-  await page.click('button[id="L2AGLb"]')
-  await page.waitForSelector('input[jsaction="paste:puy29d;"]');
-  await page.$eval('input[jsaction="paste:puy29d;"]', el => el.value = 'ynov extranet');
+  await (await page.waitForSelector('input[id="username"]')).type('lucas.escaffre@ynov.com');
+  await (await page.waitForSelector('input[id="password"]')).type('Lucas20030309');
   await page.evaluate(async () => {
-    document.querySelector('input[name="btnK"]').click();
+    document.querySelector('input[value="Connexion"]').click();
   });
-  await page.evaluate(async () => {
-    document.querySelector('a[href="https://extranet.ynov.com/"]');
-  })
 })();
+
