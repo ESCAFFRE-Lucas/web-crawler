@@ -1,4 +1,6 @@
 const puppeteer = require('puppeteer');
+import { main } from './script';
+import { bot } from './navy-bot';
 
 (async () => {
   const browser = await puppeteer.launch({headless: false});
@@ -9,10 +11,13 @@ const puppeteer = require('puppeteer');
   await (await page.waitForSelector('input[id="username"]')).type('lucas.escaffre@ynov.com');
   await (await page.waitForSelector('input[id="password"]')).type('Lucas20030309');
   await (await page.waitForSelector('input[value="Connexion"]')).click();
-  await page.waitForSelector('#id_98_cont0 > div:nth-child(1)');
-  const subject = await page.$eval('#id_98_cont0 > div:nth-child(1)', (ele:  Element) => {
-    return ele.innerHTML;
+  await page.waitForSelector('#id_98_cont0');
+  const subject = await page.$$eval('#id_98_cont0 > div:not(:nth-child(3))', (ele:  Element[]) => {
+    return ele.map((item) => {
+      return item.innerHTML;
+    });
   })
-  console.log(subject);
+  await main(subject);
+  await bot(subject);
 })();
 

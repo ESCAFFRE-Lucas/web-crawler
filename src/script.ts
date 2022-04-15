@@ -2,14 +2,13 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function main() {
+export async function main(arr: string[]) {
     await prisma.agenda.create({
         data: {
-            id: 3,
-            Jour: 'mardi',
-            Matiere: 'piscine-js',
-            Nom_professeur: 'roques',
-            Salle: 301,
+            Jour: 'vendredi',
+            Matiere: arr[0],
+            Nom_professeur: arr[1],
+            Salle: Number(arr[2]),
         }
     })
 
@@ -17,10 +16,4 @@ async function main() {
     console.dir(agenda, { depth: null });
 }
 
-main()
-    .catch((e) => {
-        throw e
-    })
-    .finally(async () => {
-        await prisma.$disconnect()
-    })
+
