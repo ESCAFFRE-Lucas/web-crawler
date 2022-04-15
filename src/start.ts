@@ -8,8 +8,6 @@ const puppeteer = require('puppeteer');
   });
   await (await page.waitForSelector('input[id="username"]')).type('lucas.escaffre@ynov.com');
   await (await page.waitForSelector('input[id="password"]')).type('Lucas20030309');
-  await page.evaluate(async () => {
-    document.querySelector('input[value="Connexion"]').click();
-  });
+  await (await page.waitForSelector('input[value="Connexion"]')).click();
 })();
 
