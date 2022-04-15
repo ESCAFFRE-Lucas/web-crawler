@@ -1284,28 +1284,130 @@
     <argument id="472" parent="162">
       <Position>1</Position>
     </argument>
-    <table id="473" parent="163" name="sqlite_master">
+    <table id="473" parent="163" name="Agenda"/>
+    <table id="474" parent="163" name="_prisma_migrations"/>
+    <table id="475" parent="163" name="sqlite_master">
       <System>1</System>
     </table>
-    <column id="474" parent="473" name="type">
+    <table id="476" parent="163" name="sqlite_sequence">
+      <System>1</System>
+    </table>
+    <column id="477" parent="473" name="id">
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="478" parent="473" name="Jour">
+      <DataType>TEXT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="479" parent="473" name="Matiere">
+      <DataType>TEXT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="480" parent="473" name="Nom_professeur">
+      <DataType>TEXT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="481" parent="473" name="Salle">
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="482" parent="473" name="Agenda_id_key">
+      <ColNames>id</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <index id="483" parent="473" name="Agenda_Jour_key">
+      <ColNames>Jour</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="484" parent="473">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>Agenda_id_key</UnderlyingIndexName>
+    </key>
+    <column id="485" parent="474" name="id">
+      <DataType>TEXT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="486" parent="474" name="checksum">
+      <DataType>TEXT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="487" parent="474" name="finished_at">
+      <DataType>DATETIME|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="488" parent="474" name="migration_name">
+      <DataType>TEXT|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="489" parent="474" name="logs">
+      <DataType>TEXT|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="490" parent="474" name="rolled_back_at">
+      <DataType>DATETIME|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="491" parent="474" name="started_at">
+      <DataType>DATETIME|0s</DataType>
+      <DefaultExpression>current_timestamp</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <column id="492" parent="474" name="applied_steps_count">
+      <DataType>INTEGER UNSIGNED|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <index id="493" parent="474" name="sqlite_autoindex__prisma_migrations_1">
+      <ColNames>id</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="494" parent="474">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex__prisma_migrations_1</UnderlyingIndexName>
+    </key>
+    <column id="495" parent="475" name="type">
       <DataType>text|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="475" parent="473" name="name">
+    <column id="496" parent="475" name="name">
       <DataType>text|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="476" parent="473" name="tbl_name">
+    <column id="497" parent="475" name="tbl_name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="477" parent="473" name="rootpage">
+    <column id="498" parent="475" name="rootpage">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="478" parent="473" name="sql">
+    <column id="499" parent="475" name="sql">
       <DataType>text|0s</DataType>
       <Position>5</Position>
+    </column>
+    <column id="500" parent="476" name="name">
+      <Position>1</Position>
+    </column>
+    <column id="501" parent="476" name="seq">
+      <Position>2</Position>
     </column>
   </database-model>
 </dataSource>

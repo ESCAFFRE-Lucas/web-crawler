@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Agenda {
-  id             Int    @id @default(autoincrement())
-  Jour           String
+  id             Int    @id @unique @default(autoincrement())
+  Jour           String @unique
   Matiere        String
   Nom_professeur String
   Salle          Int
