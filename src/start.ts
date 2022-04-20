@@ -29,7 +29,7 @@ import { bot } from './navy-bot';
   // });
   // console.log(trueSubject);
   await page.waitForSelector('#id_98_cont2')
-  const subject = await page.$$eval('#id_98_cont2 > div:not(div:nth-child > label)', (ele:  Element[]) => {
+  const subject = await page.$$eval('#id_98_cont2 > div:not(:nth-child(3))', (ele:  Element[]) => {
     return ele.map((item) => {
       return item.innerHTML;
     });
