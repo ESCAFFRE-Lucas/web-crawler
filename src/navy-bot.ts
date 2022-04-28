@@ -21,7 +21,7 @@ export const bot = (arr: string[]) => {
         let dayName = days[d.getDay()];
         console.log(`Online as ${client.user.tag}`);
 
-        new schedule.scheduleJob('00 02 16 * * *', () => {
+        new schedule.scheduleJob('00 41 14 * * *', () => {
             if (dayName === 'Samedi' || dayName === 'Dimanche') {
                 client.channels.cache.get('964164221321490462').send('<@&966690322291769434>');
                 client.channels.cache.get('964164221321490462').send('Aujourdhui pas de cours !! Profitez bien de votre ' +
@@ -34,7 +34,7 @@ export const bot = (arr: string[]) => {
                         + arr[0] + ' avec ' + arr[1] + ' en salle ' + Number(arr[arr.length-1]));
                 } else {
                     client.channels.cache.get('964164221321490462').send('Aujourdhui cest ' + dayName + ' vous avez '
-                        + arr[0] + ' avec ' + arr[1] + ' en salle : Non noté ');
+                        + arr[0] + ' avec ' + arr[1] + ' en salle : Inconnu ');
                 }
             }
         });

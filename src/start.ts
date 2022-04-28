@@ -14,25 +14,22 @@ import { bot } from './navy-bot';
   await (await page.waitForSelector('input[id="username"]')).type('lucas.escaffre@ynov.com');
   await (await page.waitForSelector('input[id="password"]')).type(process.env.PASSWORD);
   await (await page.waitForSelector('input[value="Connexion"]')).click();
-  // await page.waitForSelector('div[id="GInterface.Instances[1].Instances[9]_Grille_Elements"]');
-  // const trueSubject = await page.$$eval('div[id="GInterface.Instances[1].Instances[9]_Grille_Elements"]', async (ele: Element[]) => {
-  //   ele.map(() => {
-  //       return page.$$eval('#id_98_cont4 > div:not(:nth-child(3))', (ele:  Element[]) => {
-  //         console.log(...ele);
-  //         return ele.map((item) => {
-  //           console.log(item.innerHTML);
-  //           return item.innerHTML;
-  //         });
-  //       });
-  //   })
-  // });
-  // console.log(trueSubject);
-  await page.waitForSelector('#id_143_cont3')
-  const subject = await page.$$eval('#id_143_cont3 > div:not(div:nth-child(5) > label)', (ele:  Element[]) => {
+  const allDays = (await page.waitForXPath('/html/body/div[3]/div[2]/div[2]/div/table/tbody/tr[2]/td/div[1]/div[1]/div[2]/div[2]/div/div/div[1]/div[4]'))
+  const coursesDay = await allDays.$$eval('div', (ele:  Element[]) => {
     return ele.map((item) => {
       return item.innerHTML;
     });
   })
+  console.log(coursesDay);
+  const courses = (await page.waitForXPath('/html/body/div[3]/div[2]/div[2]/div/table/tbody/tr[2]/td/div[1]/div[1]/div[2]/div[2]/div/div/div[1]/div[4]/div[1]/div/table/tbody/tr/td'))
+  const subject = await courses.$$eval('div', (ele:  Element[]) => {
+    return ele.map((item) => {
+      return item.innerHTML;
+    });
+  })
+  console.log(subject[0]);
+  console.log(subject[1]);
+  console.log(subject[2]);
   await main(subject);
   await bot(subject);
 })();

@@ -10,19 +10,19 @@ export async function main(arr: string[]) {
     if (!isNaN(Number(arr[arr.length-1]))) {
         await prisma.agenda.create({
             data: {
-                Jour: dayName,
-                Matiere: arr[0],
-                Nom_professeur: arr[1],
-                Salle: Number(arr[arr.length-1]),
+                jour : dayName,
+                matiere: arr[0],
+                nomProfesseur: arr[1],
+                salle: Number(arr[arr.length-1]),
             }
         })
     } else {
         await prisma.agenda.create({
             data: {
-                Jour: dayName,
-                Matiere: arr[0],
-                Nom_professeur: arr[1],
-                Salle: 1,
+                jour: dayName,
+                matiere: arr[0],
+                nomProfesseur: arr[1],
+                salle: 1,
             }
         })
     }

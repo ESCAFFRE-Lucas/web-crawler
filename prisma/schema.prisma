@@ -9,8 +9,8 @@ datasource db {
 
 model Agenda {
   id             Int    @id @unique @default(autoincrement())
-  Jour           String
-  Matiere        String
-  Nom_professeur String
-  Salle          Int
+  jour           String
+  matiere        String
+  nomProfesseur String
+  salle          Int
 }
