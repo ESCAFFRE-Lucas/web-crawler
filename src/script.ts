@@ -1,16 +1,14 @@
 import { PrismaClient } from '@prisma/client';
+import {getDays} from './start';
 
 export const prisma = new PrismaClient();
 
 export async function main(arr: string[]) {
-    let days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-    let d = new Date();
-    let dayName = days[d.getDay()];
 
     if (!isNaN(Number(arr[arr.length-1]))) {
         await prisma.agenda.create({
             data: {
-                jour : dayName,
+                jour : getDays(),
                 matiere: arr[0],
                 nomProfesseur: arr[1],
                 salle: Number(arr[arr.length-1]),
@@ -19,7 +17,7 @@ export async function main(arr: string[]) {
     } else {
         await prisma.agenda.create({
             data: {
-                jour: dayName,
+                jour: getDays(),
                 matiere: arr[0],
                 nomProfesseur: arr[1],
                 salle: 1,

@@ -1,4 +1,5 @@
 import { Client, Intents } from 'discord.js';
+import {getDays} from './start';
 
 export const bot = (arr: string[]) => {
     require('dotenv').config()
@@ -16,13 +17,10 @@ export const bot = (arr: string[]) => {
     client.login(process.env.DISCORD_TOKEN);
 
     client.once("ready", () => {
-        let days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-        let d = new Date();
-        let dayName = days[d.getDay()];
         console.log(`Online as ${client.user.tag}`);
 
         new schedule.scheduleJob('00 31 11 * * *', () => {
-            if (dayName === 'Samedi' || dayName === 'Dimanche') {
+            if (getDays() === 'Samedi' || getDays() === 'Dimanche') {
                 client.channels.cache.get('964164221321490462').send('<@&966690322291769434>');
                 client.channels.cache.get('964164221321490462').send("Aujourd'hui pas de cours !! Profitez bien de votre " +
                     'week-end pour voir vos proches et travailler !! :) ');
@@ -30,10 +28,10 @@ export const bot = (arr: string[]) => {
                 client.channels.cache.get('964164221321490462').send('<@&966690322291769434>');
                 client.channels.cache.get('964164221321490462').send('Attention à ne pas oublier le cours !!');
                 if (!isNaN(Number(arr[arr.length-1]))) {
-                    client.channels.cache.get('964164221321490462').send("Aujourd'hui c'est " + dayName + ' vous avez '
+                    client.channels.cache.get('964164221321490462').send("Aujourd'hui c'est " + getDays() + ' vous avez '
                         + arr[0] + ' avec ' + arr[1] + ' en salle ' + Number(arr[arr.length-1]));
                 } else {
-                    client.channels.cache.get('964164221321490462').send("Aujourd'hui c'est " + dayName + ' vous avez '
+                    client.channels.cache.get('964164221321490462').send("Aujourd'hui c'est " + getDays() + ' vous avez '
                         + arr[0] + ' avec ' + arr[1] + ' en salle : Inconnu ');
                 }
             }

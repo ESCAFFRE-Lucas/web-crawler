@@ -2,33 +2,31 @@ const puppeteer = require('puppeteer');
 import { main, prisma } from './script';
 import { bot } from './navy-bot';
 
-(async () => {
+export const getDays = () => {
   let days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   let d = new Date();
-  let dayName = days[d.getDay()];
+  return days[d.getDay()]
+}
+
+const caseYdays = async () => {
+  let i;
+  switch (getDays()) {
+    case 'Jeudi':
+      i = 5;
+      break;
+    case 'Vendredi':
+      i = 6;
+      break;
+  }
+  return i;
+}
+
+const switchCase = async () => {
   let getYdays = await prisma.agenda.findMany({
     select: {matiere: true}
   })
-  console.log(Object.values(getYdays[getYdays.length-1]));
-
-  const browser = await puppeteer.launch({headless: false});
-  const page = await browser.newPage();
-  await page.goto('https://hp21.ynov.com/TOU', {
-    waitUntil: 'networkidle2',
-    timeout: 0,
-  });
-  await (await page.waitForSelector('input[id="username"]')).type('lucas.escaffre@ynov.com');
-  await (await page.waitForSelector('input[id="password"]')).type(process.env.PASSWORD);
-  await (await page.waitForSelector('input[value="Connexion"]')).click();
-  // const allDays = (await page.waitForXPath('/html/body/div[3]/div[2]/div[2]/div/table/tbody/tr[2]/td/div[1]/div[1]/div[2]/div[2]/div/div/div[1]/div[4]'))
-  // const coursesDay = await allDays.$$eval('div', (ele:  Element[]) => {
-  //   return ele.map((item) => {
-  //     return item.innerHTML;
-  //   });
-  // })
-  // console.log(coursesDay);
   let i;
-  switch (dayName) {
+  switch (getDays()) {
     case 'Lundi':
       i = 1;
       break;
@@ -45,18 +43,23 @@ import { bot } from './navy-bot';
       i = 6;
       break;
   }
-
   if (Object.values(getYdays[getYdays.length-1]) === ['Ydays']) {
-    switch (dayName) {
-      case 'Jeudi':
-        i = 5;
-        break;
-      case 'Vendredi':
-        i = 6;
-        break;
-    }
+    await caseYdays();
   }
-  const courses = (await page.waitForXPath(`/html/body/div[3]/div[2]/div[2]/div/table/tbody/tr[2]/td/div[1]/div[1]/div[2]/div[2]/div/div/div[1]/div[4]/div[${i}]/div/table/tbody/tr/td`))
+  return i;
+}
+
+(async () => {
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
+  await page.goto('https://hp21.ynov.com/TOU', {
+    waitUntil: 'networkidle2',
+    timeout: 0,
+  });
+  await (await page.waitForSelector('input[id="username"]')).type('lucas.escaffre@ynov.com');
+  await (await page.waitForSelector('input[id="password"]')).type(process.env.PASSWORD);
+  await (await page.waitForSelector('input[value="Connexion"]')).click();
+  const courses = (await page.waitForXPath(`/html/body/div[3]/div[2]/div[2]/div/table/tbody/tr[2]/td/div[1]/div[1]/div[2]/div[2]/div/div/div[1]/div[4]/div[${await switchCase()}]/div/table/tbody/tr/td`))
   const subject = await courses.$$eval('div', (ele:  Element[]) => {
     return ele.map((item) => {
       return item.innerHTML;
