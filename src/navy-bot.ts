@@ -21,16 +21,21 @@ export const bot = (arr: string[]) => {
         let dayName = days[d.getDay()];
         console.log(`Online as ${client.user.tag}`);
 
-        new schedule.scheduleJob('00 07 09 * * *', () => {
+        new schedule.scheduleJob('00 02 16 * * *', () => {
             if (dayName === 'Samedi' || dayName === 'Dimanche') {
-                client.channels.cache.get('964164221321490462').send('@everyone');
+                client.channels.cache.get('964164221321490462').send('<@&966690322291769434>');
                 client.channels.cache.get('964164221321490462').send('Aujourdhui pas de cours !! Profitez bien de votre ' +
                     'week-end pour voir vos proches et travailler !! :) ');
             } else {
-                client.channels.cache.get('964164221321490462').send('@everyone');
+                client.channels.cache.get('964164221321490462').send('<@&966690322291769434>');
                 client.channels.cache.get('964164221321490462').send('Attention à ne pas oublier le cours !!');
-                client.channels.cache.get('964164221321490462').send('Aujourdhui cest ' + dayName + ' vous avez '
-                    + arr[0] + ' avec ' + arr[1] + ' en salle ' + Number(arr[2]));
+                if (!isNaN(Number(arr[arr.length-1]))) {
+                    client.channels.cache.get('964164221321490462').send('Aujourdhui cest ' + dayName + ' vous avez '
+                        + arr[0] + ' avec ' + arr[1] + ' en salle ' + Number(arr[arr.length-1]));
+                } else {
+                    client.channels.cache.get('964164221321490462').send('Aujourdhui cest ' + dayName + ' vous avez '
+                        + arr[0] + ' avec ' + arr[1] + ' en salle : Non noté ');
+                }
             }
         });
     });
