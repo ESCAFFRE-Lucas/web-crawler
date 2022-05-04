@@ -14,3 +14,11 @@ model Agenda {
   Nom_professeur String
   Salle          Int
 }
+
+model Grades {
+    id          Int     @id @unique @default(autoincrement())
+    Matiere     String
+    Notation    String
+    Note        Int
+    Moyenne     Int
+}
