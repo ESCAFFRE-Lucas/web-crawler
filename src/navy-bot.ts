@@ -19,7 +19,7 @@ export const bot = (arr: string[]) => {
     client.once("ready", () => {
         console.log(`Online as ${client.user.tag}`);
 
-        new schedule.scheduleJob('00 22 9 * * *', () => {
+        new schedule.scheduleJob('00 12 30 * * *', () => {
             if (getDays() === 'Samedi' || getDays() === 'Dimanche') {
                 client.channels.cache.get('964164221321490462').send('<@&966690322291769434>');
                 client.channels.cache.get('964164221321490462').send("Aujourd'hui pas de cours !! Profitez bien de votre " +
